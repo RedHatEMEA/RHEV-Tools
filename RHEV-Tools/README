@@ -1,0 +1,21 @@
+general/import_vms.py
+read a text file and import all listed VMs from a NFS Export Domain into RHEV 3.1
+import-list-example.csv can be used as an example file
+
+general/move_vm.py
+modify the cluster property of a list of VMs so they are "moved" to a different 
+RHEV Cluster.
+List of VMs can be read from a text file, or all VMs of a specified Cluster can 
+be moved.
+
+general/vm.py
+Tool to do basic VM management. Start/stop/migrate/etc.
+VM properties are read from a configuration file or defined on the command line.
+
+general/update_preferred_host.py
+parse a configuration file and set the preferred host of a given VM accordingly
+
+general/list_all_vms.py
+print a list of all DCs, Clusters and VMs
+This script was initially only written to familiarize myself with the API, but 
+it eventually might be useful for someone else

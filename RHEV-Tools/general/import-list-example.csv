@@ -1,0 +1,6 @@
+# CSV file used to import VMs with import_vms.py
+# VM Name;Destination Storage Domain; Preferred HV; Up/Down; used diskapce; defined disk space; RHEV Cluster
+# empty lines and starting with # are ignored
+
+test01;nfs-storage;rhelh;Up;6;20;cluster1
+

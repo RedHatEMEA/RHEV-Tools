@@ -1,0 +1,10 @@
+- standardize logging (debug, logger, stdout, stderr)
+- remove customer specific data
+- standardize usage(), GPL, etc.
+- importvm in rhevtools: check if the given VM is available in the export domain
+
+- additionally to having a global default in /etc/rhev-tools/defaults.conf, it would be nice to have a user specific one too,
+  eg. to store the password or maybe ONLY a file to store the password? 
+  
+- list_all_vms.py: - TODO: Move some of the useful calls into the library
+- update_preferred_hosts.py:  - TODO: CLEANUP
