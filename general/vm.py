@@ -124,13 +124,102 @@ command = ""
 for option, argument in opts:
     if option == "-h":
         usage()
+        exit(0)
+    elif option == "--console":
+        if command != "":
+            print "\Multiple commands can not be specified"
+            usage()
+            exit(1)
+        command = "console"
+    elif option == "--migrate":
+        if command != "":
+            print "\nMultiple commands can not be specified"
+            usage()
+            exit(1)
+        command = "migrate"
+    elif option == "--start":
+        if command != "":
+            print "\nMultiple commands can not be specified"
+            usage()
+            exit(1)
+        command = "start"
+    elif option == "--stop":
+        if command != "":
+            print "\nMultiple commands can not be specified"
+            usage()
+            exit(1)
+        command = "stop"
+    elif option == "--shutdown":
+        if command != "":
+            print "\nMultiple commands can not be specified"
+            usage()
+            exit(1)
+        command = "shutdown"
+    elif option == "--create":
+        if command != "":
+            print "\nMultiple commands can not be specified"
+            usage()
+            exit(1)
+        command = "create"
+    elif option == "--details":
+        if command != "":
+            print "\nMultiple commands can not be specified"
+            usage()
+            exit(1)
+        command = "details"
+    elif option == "--delete":
+        if command != "":
+            print "\nMultiple commands can not be specified"
+            usage()
+            exit(1)
+        command = "delete"
+    elif option == "--vm":
+        config.vmname = argument
+    elif option == "--cluster":
+        config.vmconfig["cluster"] = argument
+    elif option == "--template":
+        config.vmconfig["template"] = argument
+    elif option == "--storagedomain":
+        config.vmconfig['storagedomain'] = argument
+    elif option == "--hv":
+        config.vmconfig["hv"] = argument
+    elif option == "--tohv":
+        config.vmconfig["tohv"] = argument
+    elif option == "--sockets":
+        config.vmconfig["sockets"] = argument
+    elif option == "--cores":
+        config.vmconfig["cores"] = argument
+    elif option == "--mem":
+        config.vmconfig["mem"] = argument
+    elif option == "--fqdn":
+        config.vmconfig["fqdn"] = argument
+    elif option == "--guaranteedmem":
+        config.vmconfig["guaranteedmem"] = argument
+    elif option == "--disksize":
+        config.vmconfig["disksize"] = argument
+    elif option == "--vnet":
+        config.vmconfig["vnet"] = argument
+    elif option == "--osver":
+        config.vmconfig["osver"] = argument
+    elif option == "--mac":
+        config.vmconfig['mac'] = argument
+    elif option == "--hamode":
+        config.vmconfig['hamode'] = argument
+    elif option == "--haprio":
+        config.vmconfig['haprio'] = argument
+    elif option == "--createscript":
+        config.vmconfig['createscript'] = argument
+    elif option == "--deletescript":
+        config.vmconfig['deletescript'] = argument
+    elif option == "--display":
+        config.vmconfig['display'] = argument
     elif option == "--user":
         config.rhevmconfig["user"] = argument
     elif option == "--host":
         config.rhevmconfig["host"] = argument
     elif option == "--passwd":
-        config.rhevmconfig["passwd"] = argument   
-        
+        config.rhevmconfig["passwd"] = argument    
+
 if config.rhevmconfig["host"] == "":
     print "No RHEV-M hostname was specified."
     error()
@@ -140,13 +229,12 @@ elif config.rhevmconfig["user"] == "":
 elif config.rhevmconfig["passwd"] == "":
     print "Enter password for user %s:" % (config.rhevmconfig['user'])
     config.rhevmconfig['passwd'] = getpass() 
-    
+           
 # Connect to RHEV-M
 print "Connecting to RHEV-M %s..." % (config.rhevmconfig['host'])
 api = API (url=config.rhevmconfig["host"], username=config.rhevmconfig["user"], password=config.rhevmconfig["passwd"], insecure=True)
 print "Connection established"
 print ""
-
 
 vm = vm(config.vmname, config.vmconfig, api)
 if command == "start":
