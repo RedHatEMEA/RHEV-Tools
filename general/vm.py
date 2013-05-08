@@ -19,8 +19,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-version="0.1.0"
-lastchange="2013-03-11"
+version="0.1.1"
+lastchange="2013-05-08"
 homepage="http://github.com/RedHatEMEA/RHEV-Tools"
 author="Christian Bolz <cbolz at redhat dot com>"
 

@@ -1,6 +1,10 @@
+0.1.1, 2013-05-08, Christian Bolz
+- push to github
+- reverted some accidentally removed code
+- a bit more explanation in the README file
+
 0.1.0, 2013-03-11, Christian Bolz
 - Initial Version
 - translate everything to English
 - remove customer references
 - some code cleanup
-

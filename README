@@ -19,3 +19,29 @@ general/list_all_vms.py
 print a list of all DCs, Clusters and VMs
 This script was initially only written to familiarize myself with the API, but 
 it eventually might be useful for someone else
+
+About configuration files:
+--------------------------
+Configuration files are stored in /etc/rhev-tools. They are optional, if all 
+necessary options are provided on the command line. 
+
+The default.conf is always read if it exists, but has the lowest priority.
+If an option is also specified on the command line or a VM specific config-
+uration, the setting in this file is ignored. 
+
+If a configuration file /etc/rhev-tools/<vm-name>.conf exists, it is also 
+parsed. Settings specified here, overwrite conflicting settings in default.conf,
+but still have a lower priority then everything provided on the command line.
+
+Consequently, options provided on the command line always override settings
+provided in one of the configuration files mentioned above.
+
+For VM specific tasks (like create, stop, details) the VM name is mandatory and
+will not be taken from default.conf.
+
+If the above does not work for a specific option, it most likely a bug.
+
+BUGS
+----
+There are plenty of them since this code was never really tested. Please use github
+to report them, or drop cbolz at redhat dot com an email.
