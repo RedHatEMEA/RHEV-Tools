@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-#    skript verschiebt die angegebenen
-#    VMs in einen anderen RHEV Cluster
+#    this script will move the given VM into a different RHEV Cluster
 #
 #    Copyright (C) 2013 Christian Bolz <cbolz at redhat dot com>
 #
