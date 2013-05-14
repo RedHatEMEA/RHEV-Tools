@@ -26,7 +26,7 @@ author="Christian Bolz <cbolz at redhat dot com>"
 
 from ovirtsdk.api import API
 from sys import exit, argv
-from rhevtools import config, vm
+from rhevtools import config, vm, cluster
 import getopt
 from getpass import getpass
 
@@ -52,6 +52,10 @@ def usage():
     print "--details: query details of virtual machine"
     print "--console: connect to serial console of given virtual machine"
     print "  read SERIAL_CONSOLE for detais on how to use this feature"
+    print "-—running-vms: list the status of all VMs for the given cluster"
+    print ""
+    print "Common Options"
+    print "--quiet: only minimal output"
     print ""
     print "Connection Details:"
     print "--host: URL to RHEV-M (https://<servername>)"
@@ -96,6 +100,9 @@ def usage():
     print "--deletescript: call external script after VM was deleted"
     print "  see README for more details on external scripts"
     print ""
+    print "Options for running-vms"
+    print "--cluster: list status of VMs for this cluster"
+    print ""
     exit(0)
     
 def error():
@@ -108,15 +115,16 @@ def error():
     exit(1)
 
 try:
-    opts, args = getopt.getopt(argv[1:], "h", ["serial=", "template=", "console", "start", "stop", "shutdown", "osver=", "migrate", "vm=", "cluster=", "tohv=", "fqdn=", "hv=", "host=", "user=", "passwd=", "storagedomain=", "create", "delete", "sockets=", "cores=", "guaranteedmem=", "mem=", "disksize=", "vnet=", "createscript=", "deletescript=", "mac=", "details", "display=", "hamode=", "haprio="])
+    opts, args = getopt.getopt(argv[1:], "h", ["serial=","running-vms","quiet", "template=", "console", "start", "stop", "shutdown", "osver=", "migrate", "vm=", "cluster=", "tohv=", "fqdn=", "hv=", "host=", "user=", "passwd=", "storagedomain=", "create", "delete", "sockets=", "cores=", "guaranteedmem=", "mem=", "disksize=", "vnet=", "createscript=", "deletescript=", "mac=", "details", "display=", "hamode=", "haprio="])
 except getopt.GetoptError as err:
     # print help information and exit:
     print str(err)  # will print something like "option -argument not recognized"
     error()
-    
+
 # create a config object to store the RHEV configuration details
 config = config()
-config.parseconfig()
+# default mode is not being quiet
+config.vmconfig["quiet"]=False
 # check which command will have to be executed
 command = ""
 
@@ -128,51 +136,48 @@ for option, argument in opts:
     elif option == "--console":
         if command != "":
             print "\Multiple commands can not be specified"
-            usage()
-            exit(1)
+            error()
         command = "console"
     elif option == "--migrate":
         if command != "":
             print "\nMultiple commands can not be specified"
-            usage()
-            exit(1)
+            error()
         command = "migrate"
     elif option == "--start":
         if command != "":
             print "\nMultiple commands can not be specified"
-            usage()
-            exit(1)
+            error()
         command = "start"
     elif option == "--stop":
         if command != "":
             print "\nMultiple commands can not be specified"
-            usage()
-            exit(1)
+            error()
         command = "stop"
     elif option == "--shutdown":
         if command != "":
             print "\nMultiple commands can not be specified"
-            usage()
-            exit(1)
+            error()
         command = "shutdown"
     elif option == "--create":
         if command != "":
             print "\nMultiple commands can not be specified"
-            usage()
-            exit(1)
+            error()
         command = "create"
     elif option == "--details":
         if command != "":
             print "\nMultiple commands can not be specified"
-            usage()
-            exit(1)
+            error()
         command = "details"
     elif option == "--delete":
         if command != "":
             print "\nMultiple commands can not be specified"
-            usage()
-            exit(1)
+            error()
         command = "delete"
+    elif option=="--running-vms":
+        if command!="":
+            print "\nMultiple commands can not be specified"
+            error()
+        command="running-vms"
     elif option == "--vm":
         config.vmname = argument
     elif option == "--cluster":
@@ -219,6 +224,10 @@ for option, argument in opts:
         config.rhevmconfig["host"] = argument
     elif option == "--passwd":
         config.rhevmconfig["passwd"] = argument    
+    elif option =="--quiet":
+        config.vmconfig["quiet"]=True
+    
+config.parseconfig()
 
 if config.rhevmconfig["host"] == "":
     print "No RHEV-M hostname was specified."
@@ -231,12 +240,15 @@ elif config.rhevmconfig["passwd"] == "":
     config.rhevmconfig['passwd'] = getpass() 
            
 # Connect to RHEV-M
-print "Connecting to RHEV-M %s..." % (config.rhevmconfig['host'])
+if config.vmconfig["quiet"]==False:
+    print "Connecting to RHEV-M %s..." % (config.rhevmconfig['host'])
 api = API (url=config.rhevmconfig["host"], username=config.rhevmconfig["user"], password=config.rhevmconfig["passwd"], insecure=True)
-print "Connection established"
-print ""
+if config.vmconfig["quiet"]==False:
+    print "Connection established"
+    print ""
 
-vm = vm(config.vmname, config.vmconfig, api)
+if config.vmname!="":
+    vm = vm(config.vmname, config.vmconfig, api)
 if command == "start":
     vm.start()
 elif command == "stop":
@@ -253,6 +265,13 @@ elif command == "delete":
     vm.delete(config)
 elif command == "details":
     vm.details()
+elif command=="running-vms":
+    if config.vmconfig["cluster"]=="":
+        print "Cluster has to be specified."
+        error()
+    else:
+        cluster=cluster()
+        cluster.running_vms(config.vmconfig["cluster"],config.vmconfig,api)
 else:
     print "No command specified."
     error()

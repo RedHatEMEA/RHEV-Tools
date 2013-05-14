@@ -109,7 +109,8 @@ class config():
         also check if there is a machine-specific configuration file,
         which will override defaults
         """
-        print "Loading default configuration file %s..." % (self.defaultconfig)
+        if self.vmconfig["quiet"]==False:
+            print "Loading default configuration file %s..." % (self.defaultconfig)
         self.readconfig(self.defaultconfig)
         
         __configfile=self.configdir+self.vmname+".conf"
@@ -150,6 +151,7 @@ class config():
         host=""
         user=""
         passwd=""
+        quiet=False
         
         c=open(config, 'r')
         for line in c:
@@ -224,7 +226,7 @@ class config():
                 user=rstrip(user)
             elif match("pass",line):
                 passwd=split("=",line)[1]
-                passwd=rstrip(passwd)      
+                passwd=rstrip(passwd)     
                   
         if sockets>0:        
             self.vmconfig["sockets"]=sockets
@@ -777,6 +779,32 @@ def readfile(connect,filename):
         exit(1)
         
     return(vmlist)
+
+class cluster():
+    """
+    class for handling clusters
+    """
+    
+    def running_vms(self,clustername,vmconfig,connect):
+        """
+        returns a list of VMs running on this cluster
+        """
+        
+        vms=listvmsbycluster(connect,clustername)
+        for v in vms:
+            name=v.name
+            current_vm = vm(v.name, vmconfig, connect)
+            status=current_vm.status()
+            current_vm=connect.vms.get(name=v.name)
+            ha=current_vm.get_placement_policy()
+            if ha.host==None:
+                host="None"
+            else:
+                host=connect.hosts.get(id=ha.host.id).name
+                
+            print name+";"+status+";"+host
+                
+            
 
 def listvmsbycluster(connect,cluster):
     """
