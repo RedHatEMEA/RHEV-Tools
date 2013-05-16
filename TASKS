@@ -1,5 +1,5 @@
 - standardize logging (debug, logger, stdout, stderr)
-- standardize usage(), GPL, etc.
+- standardize usage(), etc.
 
 - importvm in rhevtools: check if the given VM is available in the export domain
 
