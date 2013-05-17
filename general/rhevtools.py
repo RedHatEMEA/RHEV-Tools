@@ -151,7 +151,6 @@ class config():
         host=""
         user=""
         passwd=""
-        quiet=False
         
         c=open(config, 'r')
         for line in c:
