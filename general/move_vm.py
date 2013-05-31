@@ -38,7 +38,7 @@ def usage():
 	Usage
 	"""
 	print ""
-	print "Usgae:",sys.argv[0],"<command>"
+	print "Usage:",sys.argv[0],"<command>"
 	print ""
 	print "--from-cluster=all VMs from the specified Cluster will be moved"
 	print "--to-cluster=destinatation for all VMs"
