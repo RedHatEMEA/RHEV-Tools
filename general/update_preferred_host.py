@@ -17,9 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+#    Modifications:
+#       2013-05-31 - Miguel Pérez Colino <mperez at redhat dot com>
+#
 
-version="0.1.0"
-lastchange="2013-03-11"
+version="0.1.2"
+lastchange="2013-05-31"
 homepage="http://github.com/RedHatEMEA/RHEV-Tools"
 author="Christian Bolz <cbolz at redhat dot com>"
 
