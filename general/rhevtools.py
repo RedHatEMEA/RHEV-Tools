@@ -18,8 +18,13 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-version="0.1.0"
-lastchange="2013-03-11"
+#    Modifications:
+#       2013-05-31 - Miguel Pérez Colino <mperez at redhat dot com>
+#
+
+
+version="0.1.2"
+lastchange="2013-03-31"
 homepage="http://github.com/RedHatEMEA/RHEV-Tools"
 
 from ovirtsdk.xml import params
@@ -70,6 +75,7 @@ class config():
     # values are: rhel_6x64, rhel_5x64, windows_2008r2
     # fqdn=full qualified domain name, used when communicating with Satellite/Cobbler
     # serial=1 to enable serail console support (default: 0)
+    # quiet=True to have less verbose output
     vmconfig={
         "sockets":0,
         "cores":0,
@@ -90,7 +96,8 @@ class config():
         "display":"",
         "hamode":"",
         "haprio":"",
-        "fqdn":""
+        "fqdn":"",
+        "quiet":"True"
     }
     # Name of virtual machine
     vmname=""
