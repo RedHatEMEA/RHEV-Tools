@@ -63,7 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %{_bindir}/rhevtools.py
 %attr(0755,root,root) %{_bindir}/update_preferred_host.py
 %attr(0755,root,root) %{_bindir}/vm.py
-%doc general/import-list-example.csv README LICENSE
+%doc general/import-list-example.csv README LICENSE SERIAL_CONSOLE
 
 %changelog
 * Fri May 31 2013 Miguel Perez Colino <mperez@redhat.com> 0.1.2-1
