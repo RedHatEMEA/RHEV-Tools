@@ -1,3 +1,11 @@
+RHEV-Tools README
+----------------
+RHEV-Tools are a large collection of useful scripts utilizing the RHEV API.
+They are intended to simplify administrative tasks from command line, as well 
+as serve as an example of the RHEV API usage.
+
+Scripts
+-------
 general/import_vms.py
 read a text file and import all listed VMs from a NFS Export Domain into RHEV 3.1
 import-list-example.csv can be used as an example file
