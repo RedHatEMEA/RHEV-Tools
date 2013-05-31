@@ -1,5 +1,10 @@
-- standardize logging (debug, logger, stdout, stderr)
+TODO TASKS for RHEV-Tools
+-------------------------
+
 - standardize usage(), etc.
+* Used the term "Usage" for the content on how to use the tool and "Usage information" on how to get the usage info.
+
+- standardize logging (debug, logger, stdout, stderr)
 
 - importvm in rhevtools: check if the given VM is available in the export domain
 

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-#    Script to view events
+#    Script to view VM events
 #
 #    Copyright (C) 2013 Christian Bolz <cbolz at redhat dot com>
 #
@@ -18,9 +18,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+#    Modifications:
+#       2013-05-31 - Miguel Pérez Colino <mperez at redhat dot com>
+#
 
-version="0.1.0"
-lastchange="2013-0418"
+version="0.1.2"
+lastchange="2013-05-31"
 homepage="http://github.com/RedHatEMEA/RHEV-Tools"
 author="Christian Bolz <cbolz at redhat dot com>"
 
@@ -30,10 +33,9 @@ from getpass import getpass
 from sys import exit, argv
 from rhevtools import config
 
-
 def usage():
     """ 
-    Usage of this tool
+    Usage
     """
     print ""
     print "Tool to view RHEV events"
@@ -54,7 +56,7 @@ def usage():
     
 def error():
     """
-    usage information
+    Usage information
     """
     print ""
     print "Use -h to list all possible options"

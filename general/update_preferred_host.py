@@ -36,7 +36,7 @@ from sys import exit, argv
 
 def usage():
 	"""
-	usage information
+	Usage
 	"""
 	print "Tool to manage RHEV virtual machines"
 	print "Version",version,lastchange

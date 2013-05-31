@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# This script will print basic information about all RHEV DC, Clusters and VMs
+#    Script to print basic information about all RHEV DC, Clusters and VMs
 #
 #    Copyright (C) 2013 Christian Bolz <cbolz at redhat dot com>
 #
@@ -19,8 +19,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-version="0.1.0"
-lastchange="2013-03-27"
+version="0.1.2"
+lastchange="2013-05-31"
 homepage="http://github.com/RedHatEMEA/RHEV-Tools"
 author="Christian Bolz <cbolz at redhat dot com>"
 
@@ -33,7 +33,7 @@ from getpass import getpass
 
 def usage():
     """
-    usage information
+    Usage
     """
     print ""
     print "Tool to print basic information about RHEV DCx, CLusters and VMs"
@@ -50,7 +50,7 @@ def usage():
     
 def error():
     """
-    usage information
+    Usage information
     """
     print ""
     print "Use -h to list all possible options"
