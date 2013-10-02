@@ -24,7 +24,7 @@
 #
 
 version="0.1.3"
-lastchange="2010-10-01"
+lastchange="2013-10-01"
 homepage="http://github.com/RedHatEMEA/RHEV-Tools"
 author="Christian Bolz <cbolz at redhat dot com>"
 
