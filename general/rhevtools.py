@@ -20,12 +20,14 @@
 #
 #    Modifications:
 #       2013-05-31 - Miguel Pérez Colino <mperez at redhat dot com>
+#       2013-10-01 - Markus Laube <laubi at noris dot de>
 #
 
 
-version="0.1.2"
-lastchange="2013-03-31"
+version="0.1.3"
+lastchange="2013-10-01"
 homepage="http://github.com/RedHatEMEA/RHEV-Tools"
+author="Christian Bolz <cbolz at redhat dot com>"
 
 from ovirtsdk.xml import params
 from ovirtsdk.infrastructure.errors import RequestError
@@ -802,14 +804,15 @@ class cluster():
             current_vm = vm(v.name, vmconfig, connect)
             status=current_vm.status()
             current_vm=connect.vms.get(name=v.name)
+            current_hv=connect.hosts.get(id=v.get_host().get_id())
             ha=current_vm.get_placement_policy()
             if ha.host==None:
                 host="None"
             else:
                 host=connect.hosts.get(id=ha.host.id).name
                 
-            print name+";"+status+";"+host
-                
+            print name+";"+status+";"+current_hv.get_name()+";"+host
+
             
 
 def listvmsbycluster(connect,cluster):
