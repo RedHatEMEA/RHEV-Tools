@@ -20,10 +20,11 @@
 #
 #    Modifications:
 #       2013-05-31 - Miguel Pérez Colino <mperez at redhat dot com>
+#       2013-10-01 - Markus Laube <laubi at noris dot de>
 #
 
-version="0.1.2"
-lastchange="2013-05-31"
+version="0.1.3"
+lastchange="2013-10-01"
 homepage="http://github.com/RedHatEMEA/RHEV-Tools"
 author="Christian Bolz <cbolz at redhat dot com>"
 
@@ -147,7 +148,8 @@ for v in vms:
         print "Affinity:",v.get_placement_policy().get_affinity()    
         print "Name:",host.get_name()
         print "ID:",host.get_id()
-    
+    currenthost=api.hosts.get(id=v.get_host().get_id())
+    print "  Current Host:",currenthost.get_name()
     print "----------"
 
 api.disconnect()
