@@ -552,7 +552,7 @@ class vm():
         disksize=int(self.vmconfig['disksize'])
         ## TODO this check will fail if disksize is not specified or not an convertable
         if disksize==0:
-            print "Größe für virtuelle Disk nicht korrekt"
+            print "Incorrect virtual disk Size"
             exit(1)
 
 
@@ -575,7 +575,7 @@ class vm():
         # check if logical network exists
         nic_network=self.connect.networks.get(name=self.vmconfig['vnet'])
         if nic_network==None:
-            print "Logical Netzwerk",self.vmconfig['vnet'],"not found"
+            print "Logical Network",self.vmconfig['vnet'],"not found"
             exit(1)
         
         # read MAC - but is optional
